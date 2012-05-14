@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.maps.MapView xlmns:android="https://schemas.android.com/apk/res/android"
+	android:id="@id/mapview"
+	android:layout_width"fill_parent"
+	android:layout_height="fill_parent"
+	android:apiKey="0LRREoyv--yCkVX_niWn8NnM6Ee6wvoTpkB63Jw API Key"
+	android:clickable="true" />
+	

@@ -2,14 +2,18 @@ package org.example.locate;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class LocateActivity extends Activity implements LocationListener {
+public class LocateActivity extends Activity implements LocationListener, OnClickListener {
 	private TextView latitudeField;
 	private TextView longitudeField;
 	private LocationManager locationManager;
@@ -20,6 +24,9 @@ public class LocateActivity extends Activity implements LocationListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        View map = findViewById(R.id.map);
+        map.setOnClickListener((OnClickListener) this);
+        
         latitudeField = (TextView) findViewById(R.id.TextView02);
         longitudeField = (TextView) findViewById(R.id.TextView04);
         
@@ -28,6 +35,7 @@ public class LocateActivity extends Activity implements LocationListener {
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
         Location location = locationManager.getLastKnownLocation(provider);
+        Log.e("Provider", provider);
         
         if (location != null) {
         	System.out.println("Provider " + provider + " has been selected.");
@@ -41,6 +49,14 @@ public class LocateActivity extends Activity implements LocationListener {
         }
     }
     
+    public void onClick(View v) {
+    	switch (v.getId()) {
+    	case R.id.map:
+    		startActivity(new Intent(this, GMap.class));
+    		break;
+    	}
+    }
+
     @Override
     protected void onResume() {
     	super.onResume();
